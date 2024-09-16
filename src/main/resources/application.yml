@@ -1,0 +1,46 @@
+# This is the base configuration. This file is safe to commit to Git and serves as a template.
+# It uses placeholders for environment-specific values like the datasource URL, username, password, etc.
+
+spring:
+  # The profile that will be activated by default. Replace 'local' with 'aws' in your AWS environment.
+  profiles:
+    active: local # Change this to 'aws' for AWS
+
+  datasource:
+    # JDBC URL for the database. Use environment-specific URLs in application-local.yml and application-aws.yml.
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/sentimentsense_db
+    # Use environment variables to inject sensitive data like username and password.
+    username: ${DB_USERNAME:user} # Replace 'user' with the actual username in application-local.yml or use env vars
+    password: ${DB_PASSWORD:password} # Replace 'password' with the actual password in application-local.yml or use env vars
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  sql:
+    init:
+      mode: always # Runs SQL init scripts on startup. Adjust this based on your environment needs.
+
+  jpa:
+    hibernate:
+      ddl-auto: update # Automatically updates the schema. Set this to 'none' in production for safety.
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect # MySQL dialect for JPA
+    show-sql: true # Enable to see SQL queries in the log. Can be set to false for production.
+
+  data:
+    mongodb:
+      # MongoDB URI. Use localhost for local development and the EC2 IP for AWS.
+      uri: mongodb://${MONGO_USERNAME:root}:${MONGO_PASSWORD:example}@${MONGO_HOST:localhost}:${MONGO_PORT:27017}/sentimentsense
+
+  kafka:
+    # Kafka bootstrap server. For local, this will be localhost:9092. For AWS, use the EC2 instance's IP address.
+    bootstrap-servers: ${KAFKA_SERVER:localhost:9092}
+
+server:
+  # The port where the application will run. You can adjust this per environment if needed.
+  port: ${SERVER_PORT:8080}
+
+# Logging configuration. Adjust this based on your environment.
+logging:
+  level:
+    org:
+      springframework: DEBUG # Set to INFO or WARN for production environments to reduce log verbosity.

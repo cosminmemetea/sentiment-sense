@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### Environment-specific configuration files ###
+src/main/resources/application-local.yml
+src/main/resources/application-aws.yml
