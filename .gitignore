@@ -36,3 +36,5 @@ build/
 ### Environment-specific configuration files ###
 src/main/resources/application-local.yml
 src/main/resources/application-aws.yml
+docker-compose-deprecated.yml
+docker-compose-working.yml
