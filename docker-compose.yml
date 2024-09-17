@@ -6,12 +6,12 @@ services:
     image: mysql:8.0
     container_name: sentiment-sense-mysql
     environment:
-      MYSQL_ROOT_PASSWORD: example  # Parola root pentru MySQL
-      MYSQL_DATABASE: sentimentsense_db  # Numele bazei de date
-      MYSQL_USER: user  # Utilizator definit pentru acces
-      MYSQL_PASSWORD: password  # Parola utilizatorului definit
+      MYSQL_ROOT_PASSWORD: example  
+      MYSQL_DATABASE: sentimentsense_db  
+      MYSQL_USER: user  
+      MYSQL_PASSWORD: password 
     ports:
-      - "3306:3306"  # Portul MySQL
+      - "3306:3306"  
     networks:
       - sentiment-network
 
@@ -74,7 +74,7 @@ services:
       - mysql
       - kafka
     ports:
-      - "8080:8080"  # Aplicația Spring va rula pe acest port
+      - "8080:8080"  #  Spring Application will run on this port
     environment:
       SPRING_PROFILES_ACTIVE: docker
     networks:

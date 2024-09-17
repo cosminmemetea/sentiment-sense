@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://mysql:3306/sentimentsense_db  # Adresa bazei de date MySQL din container
-    username: user  # Numele de utilizator definit în docker-compose.yml
-    password: password  # Parola definită în docker-compose.yml
+    url: jdbc:mysql://mysql:3306/sentimentsense_db  # MySQL database address from the container
+    username: user  # User name defined in docker-compose.yml
+    password: password  # Password defined docker-compose.yml
     driver-class-name: com.mysql.cj.jdbc.Driver
     
   sql:
@@ -17,7 +17,7 @@ spring:
     show-sql: true # Enable to see SQL queries in the log. Can be set to false for production.
 
   kafka:
-    bootstrap-servers: kafka:9092  # Kafka rulează într-un container separat
+    bootstrap-servers: kafka:9092  # Kafka runs in a separate container
     consumer:
         group-id: sentiment-group
         auto-offset-reset: earliest
@@ -26,13 +26,13 @@ spring:
         key-serializer: org.apache.kafka.common.serialization.StringSerializer
         value-serializer: org.apache.kafka.common.serialization.StringSerializer
     listener:
-        missing-topics-fatal: false  # În cazul în care un topic lipsește, nu oprește aplicația
+        missing-topics-fatal: false  # If any topic is missing the application won't stop
 
 server:
-  port: 8080  # Portul pe care rulează aplicația
+  port: 8080  # The port on which the application is running
 
 logging:
   level:
     org:
       springframework:
-        kafka: debug  # Pentru a obține loguri detaliate legate de Kafka
+        kafka: debug  # To get detailed logs related to Kafka
